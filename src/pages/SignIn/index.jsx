@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
 import { signIn, signUp } from "../../service/supabase";
 
 export default function SignIn() {
   const navigate = useNavigate();
+
+  const { user, setUser } = useContext(AuthContext);
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -37,20 +40,22 @@ export default function SignIn() {
     setIsValidEmail(false);
     setIsValidPassword(false);
 
-    const { ok } = await signUp(inputs);
+    const { ok, data } = await signUp(inputs);
 
-    if (ok) navigate("/home");
+    if (ok) setUser(data.user);
 
     if (!ok) {
       const user = await signIn(inputs);
-      
+
       if (!user.ok) {
         alert(user.error.message);
         return;
       }
-      navigate("/home");
+      setUser(user.data.user);
     }
   };
+
+  if (user) navigate("/home");
 
   return (
     <>
