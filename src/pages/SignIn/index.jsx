@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
+import { signIn, signUp } from "../../service/supabase";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -19,7 +23,7 @@ export default function SignIn() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { email, password } = inputs;
@@ -29,10 +33,23 @@ export default function SignIn() {
       setIsValidPassword(!isPasswordValid(password));
       return;
     }
-    
+
     setIsValidEmail(false);
     setIsValidPassword(false);
-    console.log("Todo bien");
+
+    const { ok } = await signUp(inputs);
+
+    if (ok) navigate("/home");
+
+    if (!ok) {
+      const user = await signIn(inputs);
+      
+      if (!user.ok) {
+        alert(user.error.message);
+        return;
+      }
+      navigate("/home");
+    }
   };
 
   return (
