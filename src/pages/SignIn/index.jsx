@@ -7,6 +7,9 @@ export default function SignIn() {
     password: "",
   });
 
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPassword, setIsValidPassword] = useState(false);
+
   const handleInputsChange = (event) => {
     const { value, name } = event.target;
 
@@ -19,9 +22,17 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // validamos el correo
-    console.log(isEmail(inputs.email));
-    console.log(isPasswordValid(inputs.password));
+    const { email, password } = inputs;
+
+    if (!isEmail(email) || !isPasswordValid(password)) {
+      setIsValidEmail(!isEmail(email));
+      setIsValidPassword(!isPasswordValid(password));
+      return;
+    }
+    
+    setIsValidEmail(false);
+    setIsValidPassword(false);
+    console.log("Todo bien");
   };
 
   return (
@@ -40,11 +51,15 @@ export default function SignIn() {
                 name="email"
                 onChange={handleInputsChange}
                 placeholder="Type your email"
-                className="border border-red-500 outline-red-500 border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+                className={`border ${
+                  isValidEmail ? "border-red-500" : "border-gray-300 "
+                }  rounded-lg p-3 w-full bg-gray-50`}
               />
-              <span className="text-red-500 mt-2 text-sm">
-                Ingresa un correo valido
-              </span>
+              {isValidEmail && (
+                <span className="text-red-500 mt-2 text-sm">
+                  Ingresa un correo valido
+                </span>
+              )}
             </div>
             <div className="mt-6">
               <input
@@ -53,8 +68,15 @@ export default function SignIn() {
                 name="password"
                 onChange={handleInputsChange}
                 placeholder="Type your password"
-                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+                className={`border ${
+                  isValidPassword ? "border-red-500" : "border-gray-300"
+                }   rounded-lg p-3 w-full bg-gray-50`}
               />
+              {isValidPassword && (
+                <span className="text-red-500 mt-2 text-sm">
+                  Ingresa un password valido
+                </span>
+              )}
             </div>
             <div className="mt-6">
               <button type="submit" className="btn btn-primary w-full">
