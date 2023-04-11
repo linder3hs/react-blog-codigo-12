@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isEmail, isPasswordValid } from "../../utils/strings";
 
 export default function SignIn() {
   const [inputs, setInputs] = useState({
@@ -15,6 +16,14 @@ export default function SignIn() {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // validamos el correo
+    console.log(isEmail(inputs.email));
+    console.log(isPasswordValid(inputs.password));
+  };
+
   return (
     <>
       <div className="h-screen flex justify-center items-center bg-gray-200">
@@ -23,7 +32,7 @@ export default function SignIn() {
           <p className="mt-6 text-gray-900 font-light">
             Enter the email address associated with your account.
           </p>
-          <form action="" className="mt-10 w-full" noValidate>
+          <form onSubmit={handleSubmit} className="mt-10 w-full" noValidate>
             <div>
               <input
                 type="email"
@@ -48,7 +57,9 @@ export default function SignIn() {
               />
             </div>
             <div className="mt-6">
-              <button className="btn btn-primary w-full">Sign in</button>
+              <button type="submit" className="btn btn-primary w-full">
+                Sign in
+              </button>
             </div>
           </form>
         </div>
