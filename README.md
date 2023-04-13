@@ -13,3 +13,5 @@ para que esta carpeta no sea subida, no olviden colocarla en el archivo .gitigno
 Es el archivo donde se guardan las dependencias de nuestro proyecto, es decir, todo lo que instalemos con npm se guardará en este archivo.
 
 👀 Es como un listado de todo lo que tenemos instalado en nuestro proyecto.
+
+![image](https://www.commonsensemedia.org/sites/default/files/styles/ratio_16_9_large/public/blog/avengers-blog.jpg)

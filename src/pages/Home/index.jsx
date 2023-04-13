@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import MDEditor from "@uiw/react-md-editor";
+import { post } from "../../service/mockapi";
 
 export default function Home() {
+  const { user } = useContext(AuthContext);
+
   const [content, setContent] = useState("");
 
   const handleCreatePost = async () => {
-    console.log(content);
+    if (!content) return;
+
+    const data = {
+      user_id: user.id,
+      content,
+    };
+
+    const response = await post(data);
+
+    console.log(response);
   };
 
   return (
