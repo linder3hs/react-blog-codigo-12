@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import MDEditor from "@uiw/react-md-editor";
 import { post } from "../../service/mockapi";
+import Swal from "sweetalert2";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
@@ -15,10 +16,12 @@ export default function Home() {
       user_id: user.id,
       content,
     };
-
-    const response = await post(data);
-
-    console.log(response);
+    await post(data);
+    setContent("");
+    Swal.fire({
+      text: "Post creado correctamente",
+      icon: "success",
+    });
   };
 
   return (
