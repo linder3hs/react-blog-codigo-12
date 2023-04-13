@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 export default function MainLayout() {
   const { user } = useContext(AuthContext);
 
-  console.log("user", user);
+  if (!user) return <Navigate to={"/"} />;
+
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">

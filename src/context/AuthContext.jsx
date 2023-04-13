@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = (props) => {
   const { children } = props;
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const fetchUser = async () => {
     const currentUser = await getCurrentUser();

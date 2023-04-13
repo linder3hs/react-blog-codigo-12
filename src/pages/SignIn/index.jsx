@@ -42,7 +42,10 @@ export default function SignIn() {
 
     const { ok, data } = await signUp(inputs);
 
-    if (ok) setUser(data.user);
+    if (ok) {
+      saveUser(data.user);
+      setUser(data.user);
+    }
 
     if (!ok) {
       const user = await signIn(inputs);
