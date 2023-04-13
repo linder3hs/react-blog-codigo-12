@@ -13,6 +13,7 @@
     "@ckeditor/ckeditor5-react": "6.0.0",
     "@ckeditor/ckeditor5-theme-lark": "37.0.1",
     "@supabase/supabase-js": "2.17.0",
+    "@uiw/react-md-editor": "3.20.7",
     "daisyui": "2.51.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

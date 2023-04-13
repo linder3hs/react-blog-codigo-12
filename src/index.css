@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wmde-markdown-var {
+  height: 600px !important;
+}

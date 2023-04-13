@@ -1,6 +1,5 @@
 import { useState } from "react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
+import MDEditor from "@uiw/react-md-editor";
 
 export default function Home() {
   const [content, setContent] = useState("");
@@ -16,11 +15,8 @@ export default function Home() {
           <h1 className="text-2xl">
             Escribe un post y comparte tu conocimiento!
           </h1>
-          <div className="mt-10">
-            <CKEditor
-              editor={ClassicEditor}
-              onChange={(_, editor) => setContent(editor.getData())}
-            />
+          <div className="mt-10 w-full">
+            <MDEditor value={content} onChange={setContent} />
           </div>
           <div className="mt-10">
             <button onClick={handleCreatePost} className="btn btn-primary">
