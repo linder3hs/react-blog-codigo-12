@@ -7,7 +7,7 @@ import { signIn, signUp } from "../../service/supabase";
 export default function SignIn() {
   const navigate = useNavigate();
 
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, saveUser } = useContext(AuthContext);
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -51,6 +51,7 @@ export default function SignIn() {
         alert(user.error.message);
         return;
       }
+      saveUser(user.data.user);
       setUser(user.data.user);
     }
   };
