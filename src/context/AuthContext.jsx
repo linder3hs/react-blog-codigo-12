@@ -13,6 +13,10 @@ export const AuthProvider = (props) => {
     setUser(currentUser);
   };
 
+  const saveUser = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+  };
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -22,6 +26,7 @@ export const AuthProvider = (props) => {
       value={{
         user,
         setUser,
+        saveUser,
       }}
     >
       {children}
