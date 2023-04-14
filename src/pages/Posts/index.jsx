@@ -18,15 +18,15 @@ export default function Posts() {
     <>
       <div className="p-12 w-2/4 m-auto">
         <section>
-          <div className="flex">
+          <div className="flex items-center">
             <img
-              width={30}
+              width="30"
               className="rounded-full"
               src="https://www.linderhassinger.info/_next/image?url=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F20673011%3Fv%3D4&w=640&q=75"
               alt="Linder Hassinger"
             />
             <span className="font-light">
-              &nbsp;Linder Hassinger . Mar 14 ⭐️ Member only
+              &nbsp;&nbsp;Linder Hassinger . Mar 14 ⭐️ Member only
             </span>
           </div>
           <div className="mt-5 flex">

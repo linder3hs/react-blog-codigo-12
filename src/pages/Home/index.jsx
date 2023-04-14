@@ -7,17 +7,33 @@ import Swal from "sweetalert2";
 export default function Home() {
   const { user } = useContext(AuthContext);
 
-  const [content, setContent] = useState("");
+  const [values, setValues] = useState({
+    title: "",
+    resume: "",
+    cover: "",
+    content: "",
+    user_id: user.id,
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   const handleCreatePost = async () => {
-    if (!content) return;
+    await post(values);
 
-    const data = {
+    setValues({
+      title: "",
+      resume: "",
+      cover: "",
+      content: "",
       user_id: user.id,
-      content,
-    };
-    await post(data);
-    setContent("");
+    });
+
     Swal.fire({
       text: "Post creado correctamente",
       icon: "success",
@@ -31,8 +47,48 @@ export default function Home() {
           <h1 className="text-2xl">
             Escribe un post y comparte tu conocimiento!
           </h1>
+          <div className="mt-10 w-full grid grid-cols-2 gap-6">
+            <div>
+              <input
+                type="text"
+                placeholder="Type a title"
+                value={values.title}
+                name="title"
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Type a resume"
+                value={values.resume}
+                name="resume"
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Paste an image link"
+                value={values.cover}
+                name="cover"
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+              />
+            </div>
+          </div>
           <div className="mt-10 w-full">
-            <MDEditor value={content} onChange={setContent} />
+            <MDEditor
+              value={values.content}
+              onChange={(event) => {
+                setValues({
+                  ...values,
+                  content: event,
+                });
+              }}
+            />
           </div>
           <div className="mt-10">
             <button onClick={handleCreatePost} className="btn btn-primary">
