@@ -48,3 +48,14 @@ export async function getCurrentUser() {
 
   return data.user;
 }
+
+export async function updateUser(id, data) {
+  const { user, error } = await supabase.auth.admin.updateUserById(id, data);
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  return user;
+}
