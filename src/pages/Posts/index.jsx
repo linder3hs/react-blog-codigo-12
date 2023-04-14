@@ -16,7 +16,7 @@ export default function Posts() {
 
   return (
     <>
-      <div className="p-12 w-2/4 m-auto">
+      <div className="p-12 w-full lg:w-2/4 m-auto">
         {posts.length > 0 &&
           posts.map((post) => <Post key={post.id} post={post} />)}
       </div>

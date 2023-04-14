@@ -19,7 +19,7 @@ export default function Detail() {
 
   return (
     <>
-      <div className="w-2/4 p-6 m-auto mt-10">
+      <div className="w-full lg:w-2/4 p-6 m-auto mt-10">
         {post && <MDEditor.Markdown source={post.content} />}
       </div>
     </>

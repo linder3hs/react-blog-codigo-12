@@ -5,7 +5,7 @@ export default function Post({ post }) {
     <>
       <Link to={`/detail/${post.id}`}>
         <section className="mt-10">
-          <div className="flex items-center">
+          <div className="flex lg:items-center">
             <img
               width="30"
               className="rounded-full"
@@ -16,8 +16,8 @@ export default function Post({ post }) {
               &nbsp;&nbsp;Linder Hassinger . Mar 14 ⭐️ Member only
             </span>
           </div>
-          <div className="mt-5 flex gap-5 items-center justify-between">
-            <div className=" w-4/5">
+          <div className="mt-5 flex flex-col lg:flex-row gap-5 items-center justify-between">
+            <div className="w-full lg:w-4/5">
               <h1 className="text-2xl font-bold">{post.title}</h1>
               <p className="w-3/4 mt-3">{post.resume}</p>
             </div>
