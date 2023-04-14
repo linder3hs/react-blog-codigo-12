@@ -1,8 +1,9 @@
 const url = "https://6437730c894c9029e8be4944.mockapi.io/posts";
 
-export const get = async () => {
+export const get = async (id = null) => {
   try {
-    const response = await fetch(url);
+    const finalURL = id ? `${url}/${id}` : url;
+    const response = await fetch(finalURL);
 
     if (!response.ok) return false;
 
