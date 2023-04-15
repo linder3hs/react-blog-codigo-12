@@ -13,6 +13,9 @@ export default function Home() {
     cover: "",
     content: "",
     user_id: user.id,
+    user_avatar: user.user_metadata.avatar,
+    user_name: user.user_metadata.name,
+    user_lastname: user.user_metadata.lastname,
   });
 
   const handleInputChange = (event) => {
@@ -32,6 +35,9 @@ export default function Home() {
       cover: "",
       content: "",
       user_id: user.id,
+      user_avatar: user.user_metadata.avatar,
+      user_name: user.user_metadata.name,
+      user_lastname: user.user_metadata.lastname,
     });
 
     Swal.fire({

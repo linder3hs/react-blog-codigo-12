@@ -9,11 +9,12 @@ export default function Post({ post }) {
             <img
               width="30"
               className="rounded-full"
-              src="https://www.linderhassinger.info/_next/image?url=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F20673011%3Fv%3D4&w=640&q=75"
-              alt="Linder Hassinger"
+              src={post.user_avatar}
+              alt={post.user_name}
             />
             <span className="font-light">
-              &nbsp;&nbsp;Linder Hassinger . Mar 14 ⭐️ Member only
+              &nbsp;&nbsp;{post.user_name} {post.user_lastname} .{" "}
+              {new Date(post.createdAt).toDateString()} ⭐️ Member only
             </span>
           </div>
           <div className="mt-5 flex flex-col lg:flex-row gap-5 items-center justify-between">
