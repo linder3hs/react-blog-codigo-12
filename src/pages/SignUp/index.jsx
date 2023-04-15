@@ -1,15 +1,18 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
 import { signIn, signUp } from "../../service/supabase";
 
-export default function SignIn() {
+export default function SignUp() {
   const navigate = useNavigate();
 
   const { user, setUser, saveUser } = useContext(AuthContext);
 
   const [inputs, setInputs] = useState({
+    name: "",
+    lastname: "",
+    avatar: "",
     email: "",
     password: "",
   });
@@ -39,24 +42,6 @@ export default function SignIn() {
 
     setIsValidEmail(false);
     setIsValidPassword(false);
-
-    const { ok, data } = await signUp(inputs);
-
-    if (ok) {
-      saveUser(data.user);
-      setUser(data.user);
-    }
-
-    if (!ok) {
-      const user = await signIn(inputs);
-
-      if (!user.ok) {
-        alert(user.error.message);
-        return;
-      }
-      saveUser(user.data.user);
-      setUser(user.data.user);
-    }
   };
 
   if (user) navigate("/home");
@@ -65,11 +50,41 @@ export default function SignIn() {
     <>
       <div className="h-screen flex justify-center items-center bg-gray-200">
         <div className="artboard-demo phone-2 p-6">
-          <h1 className="text-2xl">Sign in with email</h1>
+          <h1 className="text-2xl">Sign up</h1>
           <p className="mt-6 text-gray-900 font-light">
-            Enter the email address associated with your account.
+            Registrarte y comparte todo tu conocimiento.
           </p>
-          <form onSubmit={handleSubmit} className="mt-10 w-full" noValidate>
+          <form onSubmit={handleSubmit} className="mt-10 w-full flex flex-col gap-5" noValidate>
+            <div>
+              <input
+                type="text"
+                value={inputs.avatar}
+                name="avatar"
+                onChange={handleInputsChange}
+                placeholder="Paste your avatar"
+                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={inputs.name}
+                name="name"
+                onChange={handleInputsChange}
+                placeholder="Type your name"
+                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={inputs.lastname}
+                name="lastname"
+                onChange={handleInputsChange}
+                placeholder="Type your lastname"
+                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
+              />
+            </div>
             <div>
               <input
                 type="email"
@@ -87,7 +102,7 @@ export default function SignIn() {
                 </span>
               )}
             </div>
-            <div className="mt-6">
+            <div>
               <input
                 type="password"
                 value={inputs.password}
@@ -106,11 +121,8 @@ export default function SignIn() {
             </div>
             <div className="mt-6">
               <button type="submit" className="btn btn-primary w-full">
-                Sign in
+                Sign up
               </button>
-            </div>
-            <div className="mt-6 text-center">
-              <span>Eres nuevo? <Link className="text-blue-600" to={"/signup"}>Registrate</Link> </span>
             </div>
           </form>
         </div>

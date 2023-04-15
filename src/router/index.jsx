@@ -2,10 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import {
   HomeView,
-  SignInView,
-  PostsView,
   DetailView,
+  PostsView,
   ProfileView,
+  SignInView,
+  SignUpView,
 } from "../pages";
 
 export default function Router() {
@@ -18,6 +19,7 @@ export default function Router() {
           <Route path="/detail/:id" element={<DetailView />} />
           <Route path="/profile" element={<ProfileView />} />
         </Route>
+        <Route path="/signup" element={<SignUpView />} />
         <Route path="/" element={<SignInView />} />
       </Routes>
     </BrowserRouter>
