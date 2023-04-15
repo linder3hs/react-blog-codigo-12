@@ -2,7 +2,8 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
-import { signIn } from "../../service/supabase";
+import { signIn, signInWithGithub } from "../../service/supabase";
+import github from "../../assets/github.svg";
 import Swal from "sweetalert2";
 
 export default function SignIn() {
@@ -50,7 +51,7 @@ export default function SignIn() {
       });
       return;
     }
-    
+
     saveUser(user.data.user);
     setUser(user.data.user);
   };
@@ -103,6 +104,15 @@ export default function SignIn() {
             <div className="mt-6">
               <button type="submit" className="btn btn-primary w-full">
                 Sign in
+              </button>
+            </div>
+            <div className="mt-6">
+              <button
+                onClick={signInWithGithub}
+                className="bg-gray-950 w-full flex items-center justify-center p-2.5 text-white gap-3 rounded-md"
+              >
+                <img src={github} width={30} alt="" />
+                <span>Sign in with Github</span>
               </button>
             </div>
             <div className="mt-6 text-center">

@@ -61,3 +61,16 @@ export async function updateUser(user) {
 
   return data;
 }
+
+export async function signInWithGithub() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+  });
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  return data;
+}
