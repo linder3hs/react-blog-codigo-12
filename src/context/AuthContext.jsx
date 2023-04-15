@@ -17,6 +17,11 @@ export const AuthProvider = (props) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
+  const logout = () => {
+    localStorage.clear();
+    setUser(null);
+  };
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -27,6 +32,7 @@ export const AuthProvider = (props) => {
         user,
         setUser,
         saveUser,
+        logout,
       }}
     >
       {children}

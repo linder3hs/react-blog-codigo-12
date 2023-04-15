@@ -4,7 +4,7 @@ import { updateUser } from "../../service/supabase";
 import Swal from "sweetalert2";
 
 export default function Profile() {
-  const { user, saveUser } = useContext(AuthContext);
+  const { user, saveUser, logout } = useContext(AuthContext);
 
   const [values, setValues] = useState({
     avatar: user.user_metadata?.avatar,
@@ -20,6 +20,8 @@ export default function Profile() {
       [name]: value,
     });
   };
+
+  const signOut = () => logout();
 
   const fetchUpdateUser = async () => {
     const response = await updateUser(values);
@@ -37,10 +39,7 @@ export default function Profile() {
           <div className="artboard-demo phone-2 p-6">
             <div className="avatar">
               <div className="w-24 rounded-full">
-                <img
-                  src={values.avatar}
-                  alt=""
-                />
+                <img src={values.avatar} alt={values.name} />
               </div>
             </div>
             <div className="mt-10 w-full">
@@ -84,6 +83,11 @@ export default function Profile() {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="mt-5 text-center">
+            <button onClick={signOut} className="text-red-500">
+              Cerrar sesión
+            </button>
           </div>
         </div>
       </div>
