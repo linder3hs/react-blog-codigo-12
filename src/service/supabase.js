@@ -49,9 +49,9 @@ export async function getCurrentUser() {
   return data.user;
 }
 
-export async function updateUser(id, data) {
-  const { user, error } = await supabase.auth.admin.updateUserById(id, {
-    data,
+export async function updateUser(user) {
+  const { data, error } = await supabase.auth.updateUser({
+    data: user,
   });
 
   if (error) {
@@ -59,5 +59,5 @@ export async function updateUser(id, data) {
     return;
   }
 
-  return user;
+  return data;
 }

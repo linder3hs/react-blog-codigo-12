@@ -1,14 +1,15 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { updateUser } from "../../service/supabase";
+import Swal from "sweetalert2";
 
 export default function Profile() {
-  const { user } = useContext(AuthContext);
+  const { user, saveUser } = useContext(AuthContext);
 
   const [values, setValues] = useState({
-    avatar: "",
-    name: "",
-    lastname: "",
+    avatar: user.user_metadata?.avatar,
+    name: user.user_metadata?.name,
+    lastname: user.user_metadata?.lastname,
   });
 
   const handleInputChange = (event) => {
@@ -21,8 +22,12 @@ export default function Profile() {
   };
 
   const fetchUpdateUser = async () => {
-    const response = await updateUser(user.id, values);
-    console.log("response", response);
+    const response = await updateUser(values);
+    saveUser(response.user);
+    Swal.fire({
+      text: "Usuario actualizado",
+      icon: "success",
+    });
   };
 
   return (
@@ -33,7 +38,7 @@ export default function Profile() {
             <div className="avatar">
               <div className="w-24 rounded-full">
                 <img
-                  src="https://avatars.githubusercontent.com/u/20673011?v=4"
+                  src={values.avatar}
                   alt=""
                 />
               </div>
