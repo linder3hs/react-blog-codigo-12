@@ -2,7 +2,8 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
-import { signIn, signUp } from "../../service/supabase";
+import { signUp } from "../../service/supabase";
+import Swal from "sweetalert2";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -42,6 +43,31 @@ export default function SignUp() {
 
     setIsValidEmail(false);
     setIsValidPassword(false);
+
+    const userData = {
+      email: inputs.email,
+      password: inputs.password,
+      options: {
+        data: {
+          name: inputs.name,
+          lastname: inputs.lastname,
+          avatar: inputs.avatar,
+        },
+      },
+    };
+
+    const user = await signUp(userData);
+
+    if (!user.ok) {
+      Swal.fire({
+        text: user.error.message,
+        icon: "error",
+      });
+      return;
+    }
+
+    saveUser(user.data.user);
+    setUser(user.data.user);
   };
 
   if (user) navigate("/home");
@@ -54,7 +80,11 @@ export default function SignUp() {
           <p className="mt-6 text-gray-900 font-light">
             Registrarte y comparte todo tu conocimiento.
           </p>
-          <form onSubmit={handleSubmit} className="mt-10 w-full flex flex-col gap-5" noValidate>
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 w-full flex flex-col gap-5"
+            noValidate
+          >
             <div>
               <input
                 type="text"
