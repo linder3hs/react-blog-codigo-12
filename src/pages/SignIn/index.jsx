@@ -2,7 +2,8 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
-import { signIn, signUp } from "../../service/supabase";
+import { signIn } from "../../service/supabase";
+import Swal from "sweetalert2";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -40,23 +41,18 @@ export default function SignIn() {
     setIsValidEmail(false);
     setIsValidPassword(false);
 
-    const { ok, data } = await signUp(inputs);
+    const user = await signIn(inputs);
 
-    if (ok) {
-      saveUser(data.user);
-      setUser(data.user);
+    if (!user.ok) {
+      Swal.fire({
+        text: user.error.message,
+        icon: "error",
+      });
+      return;
     }
-
-    if (!ok) {
-      const user = await signIn(inputs);
-
-      if (!user.ok) {
-        alert(user.error.message);
-        return;
-      }
-      saveUser(user.data.user);
-      setUser(user.data.user);
-    }
+    
+    saveUser(user.data.user);
+    setUser(user.data.user);
   };
 
   if (user) navigate("/home");
@@ -110,7 +106,12 @@ export default function SignIn() {
               </button>
             </div>
             <div className="mt-6 text-center">
-              <span>Eres nuevo? <Link className="text-blue-600" to={"/signup"}>Registrate</Link> </span>
+              <span>
+                Eres nuevo?{" "}
+                <Link className="text-blue-600" to={"/signup"}>
+                  Registrate
+                </Link>{" "}
+              </span>
             </div>
           </form>
         </div>
