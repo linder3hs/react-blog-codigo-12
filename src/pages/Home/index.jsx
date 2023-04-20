@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import MDEditor from "@uiw/react-md-editor";
 import { post } from "../../service/mockapi";
+import { Card } from "../../components";
 import Swal from "sweetalert2";
 
 export default function Home() {
@@ -49,7 +50,7 @@ export default function Home() {
   return (
     <>
       <div className="p-10 bg-gray-200">
-        <div className="artboard-demo phone-2 p-6">
+        <Card>
           <h1 className="text-2xl">
             Escribe un post y comparte tu conocimiento!
           </h1>
@@ -101,7 +102,7 @@ export default function Home() {
               Guardar
             </button>
           </div>
-        </div>
+        </Card>
       </div>
     </>
   );

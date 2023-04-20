@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isPasswordValid } from "../../utils/strings";
 import { signUp } from "../../service/supabase";
+import { Card } from "../../components";
 import Swal from "sweetalert2";
 
 export default function SignUp() {
@@ -75,7 +76,7 @@ export default function SignUp() {
   return (
     <>
       <div className="h-screen flex justify-center items-center bg-gray-200">
-        <div className="artboard-demo phone-2 p-6">
+        <Card>
           <h1 className="text-2xl">Sign up</h1>
           <p className="mt-6 text-gray-900 font-light">
             Registrarte y comparte todo tu conocimiento.
@@ -155,7 +156,7 @@ export default function SignUp() {
               </button>
             </div>
           </form>
-        </div>
+        </Card>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { updateUser } from "../../service/supabase";
+import { Card } from "../../components";
 import Swal from "sweetalert2";
 
 export default function Profile() {
@@ -36,7 +37,7 @@ export default function Profile() {
     <>
       <div className="bg-gray-200 h-screen">
         <div className="w-3/4 lg:w-1/4 m-auto pt-10">
-          <div className="artboard-demo phone-2 p-6">
+          <Card>
             <div className="avatar">
               <div className="w-24 rounded-full">
                 <img src={values.avatar} alt={values.name} />
@@ -83,7 +84,7 @@ export default function Profile() {
                 </button>
               </div>
             </div>
-          </div>
+          </Card>
           <div className="mt-5 text-center">
             <button onClick={signOut} className="text-red-500">
               Cerrar sesión
