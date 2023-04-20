@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import MDEditor from "@uiw/react-md-editor";
 import { post } from "../../service/mockapi";
-import { Card } from "../../components";
+import { Card, PostForm } from "../../components";
 import Swal from "sweetalert2";
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
     setValues({
       ...values,
       [name]: value,
@@ -54,37 +55,8 @@ export default function Home() {
           <h1 className="text-2xl">
             Escribe un post y comparte tu conocimiento!
           </h1>
-          <div className="mt-10 w-full grid grid-cols-2 gap-6">
-            <div>
-              <input
-                type="text"
-                placeholder="Type a title"
-                value={values.title}
-                name="title"
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Type a resume"
-                value={values.resume}
-                name="resume"
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Paste an image link"
-                value={values.cover}
-                name="cover"
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-lg p-3 w-full bg-gray-50"
-              />
-            </div>
+          <div className="w-full grid grid-cols-2 gap-6">
+            <PostForm values={values} handleInputChange={handleInputChange} />
           </div>
           <div className="mt-10 w-full">
             <MDEditor

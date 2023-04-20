@@ -1,5 +1,5 @@
 export default function TextField(props) {
-  const { inputs, isValid, elements, handleInputsChange } = props;
+  const { inputs, isValid = null, elements, handleInputsChange } = props;
 
   return (
     <>
@@ -12,12 +12,14 @@ export default function TextField(props) {
             onChange={handleInputsChange}
             placeholder={element.placeholder}
             className={`border ${
-              isValid[element.isValid] ? "border-red-500" : "border-gray-300 "
+              isValid && isValid[element?.isValid]
+                ? "border-red-500"
+                : "border-gray-300 "
             }  rounded-lg p-3 w-full bg-gray-50`}
           />
-          {isValid[element.isValid] && (
+          {isValid && isValid[element?.isValid] && (
             <span className="text-red-500 mt-2 text-sm">
-              {element.messageInvalid}
+              {element?.messageInvalid}
             </span>
           )}
         </div>
