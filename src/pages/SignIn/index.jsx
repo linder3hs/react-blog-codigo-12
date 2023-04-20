@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Card, SignForm } from "../../components";
+import { Card, SignInForm } from "../../components";
 import { isEmail, isPasswordValid } from "../../utils/strings";
 import { signIn } from "../../service/supabase";
 import Swal from "sweetalert2";
@@ -72,7 +72,7 @@ export default function SignIn() {
           <p className="mt-6 text-gray-900 font-light">
             Enter the email address associated with your account.
           </p>
-          <SignForm
+          <SignInForm
             handleSubmit={handleSubmit}
             handleInputsChange={handleInputsChange}
             inputs={inputs}
