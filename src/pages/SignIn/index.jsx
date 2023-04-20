@@ -16,8 +16,10 @@ export default function SignIn() {
     password: "",
   });
 
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isValid, setIsValid] = useState({
+    isValidEmail: false,
+    isValidPassword: false,
+  });
 
   const handleInputsChange = (event) => {
     const { value, name } = event.target;
@@ -34,13 +36,17 @@ export default function SignIn() {
     const { email, password } = inputs;
 
     if (!isEmail(email) || !isPasswordValid(password)) {
-      setIsValidEmail(!isEmail(email));
-      setIsValidPassword(!isPasswordValid(password));
+      setIsValid({
+        isValidEmail: !isEmail(email),
+        isValidPassword: !isPasswordValid(password),
+      });
       return;
     }
 
-    setIsValidEmail(false);
-    setIsValidPassword(false);
+    setIsValid({
+      isValidEmail: false,
+      isValidPassword: false,
+    });
 
     const user = await signIn(inputs);
 
@@ -70,8 +76,7 @@ export default function SignIn() {
             handleSubmit={handleSubmit}
             handleInputsChange={handleInputsChange}
             inputs={inputs}
-            isValidEmail={isValidEmail}
-            isValidPassword={isValidPassword}
+            isValid={isValid}
           />
         </Card>
       </div>

@@ -1,52 +1,20 @@
 import { Link } from "react-router-dom";
 import { signInWithGithub } from "../../service/supabase";
+import { elements } from "./elements";
+import TextField from "../TextField";
 import github from "../../assets/github.svg";
 
 export default function SignForm(props) {
-  const {
-    handleSubmit,
-    inputs,
-    handleInputsChange,
-    isValidEmail,
-    isValidPassword,
-  } = props;
+  const { handleSubmit, inputs, handleInputsChange, isValid } = props;
   return (
     <>
       <form onSubmit={handleSubmit} className="mt-10 w-full" noValidate>
-        <div>
-          <input
-            type="email"
-            value={inputs.email}
-            name="email"
-            onChange={handleInputsChange}
-            placeholder="Type your email"
-            className={`border ${
-              isValidEmail ? "border-red-500" : "border-gray-300 "
-            }  rounded-lg p-3 w-full bg-gray-50`}
-          />
-          {isValidEmail && (
-            <span className="text-red-500 mt-2 text-sm">
-              Ingresa un correo valido
-            </span>
-          )}
-        </div>
-        <div className="mt-6">
-          <input
-            type="password"
-            value={inputs.password}
-            name="password"
-            onChange={handleInputsChange}
-            placeholder="Type your password"
-            className={`border ${
-              isValidPassword ? "border-red-500" : "border-gray-300"
-            }   rounded-lg p-3 w-full bg-gray-50`}
-          />
-          {isValidPassword && (
-            <span className="text-red-500 mt-2 text-sm">
-              Ingresa un password valido
-            </span>
-          )}
-        </div>
+        <TextField
+          elements={elements}
+          inputs={inputs}
+          isValid={isValid}
+          handleInputsChange={handleInputsChange}
+        />
         <div className="mt-6">
           <button type="submit" className="btn btn-primary w-full">
             Sign in
@@ -54,6 +22,7 @@ export default function SignForm(props) {
         </div>
         <div className="mt-6">
           <button
+            type="button"
             onClick={signInWithGithub}
             className="bg-gray-950 w-full flex items-center justify-center p-2.5 text-white gap-3 rounded-md"
           >
