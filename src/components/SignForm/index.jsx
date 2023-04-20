@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { signInWithGithub } from "../../service/supabase";
 import { elements } from "./elements";
-import TextField from "../TextField";
+import { TextField, SubmitButton } from "../../components";
 import github from "../../assets/github.svg";
 
 export default function SignForm(props) {
   const { handleSubmit, inputs, handleInputsChange, isValid } = props;
+
   return (
     <>
       <form onSubmit={handleSubmit} className="mt-10 w-full" noValidate>
@@ -15,11 +16,7 @@ export default function SignForm(props) {
           isValid={isValid}
           handleInputsChange={handleInputsChange}
         />
-        <div className="mt-6">
-          <button type="submit" className="btn btn-primary w-full">
-            Sign in
-          </button>
-        </div>
+        <SubmitButton text="Sign in" />
         <div className="mt-6">
           <button
             type="button"
