@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { updateUser } from "../../service/supabase";
-import { Card } from "../../components";
+import { Card, ProfileForm } from "../../components";
 import Swal from "sweetalert2";
 
 export default function Profile() {
@@ -11,6 +11,7 @@ export default function Profile() {
     avatar: user.user_metadata?.avatar,
     name: user.user_metadata?.name,
     lastname: user.user_metadata?.lastname,
+    email: user.user_metadata?.email,
   });
 
   const handleInputChange = (event) => {
@@ -44,38 +45,11 @@ export default function Profile() {
               </div>
             </div>
             <div className="mt-10 w-full">
-              <div className="w-full flex flex-col gap-5">
-                <input
-                  type="text"
-                  className="input input-bordered w-full"
-                  placeholder="Type your image link"
-                  name="avatar"
-                  value={values.avatar}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  className="input input-bordered w-full"
-                  placeholder="Type your name"
-                  name="name"
-                  value={values.name}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  className="input input-bordered w-full"
-                  placeholder="Type your lastname"
-                  name="lastname"
-                  value={values.lastname}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="email"
-                  disabled
-                  value={user.email}
-                  className="input input-bordered w-full"
-                  placeholder="Type your email"
-                />
+              <ProfileForm
+                values={values}
+                handleInputChange={handleInputChange}
+              />
+              <div className="w-full flex flex-col gap-5 mt-10">
                 <button
                   onClick={fetchUpdateUser}
                   className="bg-gray-800 text-white rounded-md p-3 text-xl"

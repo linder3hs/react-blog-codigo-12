@@ -13,3 +13,5 @@ export { default as GithubButton } from "./GithubButton";
 export { default as SingUpForm } from "./SingUpForm";
 
 export { default as PostForm } from "./PostForm";
+
+export { default as ProfileForm } from "./ProfileForm";

@@ -1,0 +1,35 @@
+export const elements = [
+  {
+    type: "text",
+    value: "avatar",
+    name: "avatar",
+    placeholder: "Type your image link",
+    messageInvalid: "",
+    isValid: "",
+  },
+  {
+    type: "text",
+    value: "name",
+    name: "name",
+    placeholder: "Type your name",
+    messageInvalid: "",
+    isValid: "",
+  },
+  {
+    type: "text",
+    value: "lastname",
+    name: "lastname",
+    placeholder: "Type your lastname",
+    messageInvalid: "",
+    isValid: "",
+  },
+  {
+    type: "email",
+    value: "email",
+    name: "email",
+    placeholder: "Type your email",
+    disabled: true,
+    messageInvalid: "",
+    isValid: "",
+  },
+];
